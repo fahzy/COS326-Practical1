@@ -10,21 +10,28 @@ import java.util.List;
 import java.util.ArrayList;
 
 // TODO Add comments to code
-// TODO Create git repository
 
 public class Database
 {
+    /**This function allows us to access or create a db4o database file or create a new one.*/
     public void open()
 	{
         this.database = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), fileName);
 	}
 
+    /**
+     * This function will close the database file and release all the resources associated with it
+     */
 	public void close()
 	{
         this.database.close();
-
 	}
     
+    /**
+     * This function adds a degree program object to the database file
+     * @param reader 
+     * @throws IOException
+     */
     public void addDegreeProgram(BufferedReader reader) throws IOException
     {
         System.out.print("Enter a degree program to add (Type Q to return to menu): ");
@@ -48,6 +55,11 @@ public class Database
 
     }
     
+    /**
+     * This function adds an undergraduate object to the database file
+     * @param reader 
+     * @throws IOException
+     */
     public void addUndergraduate(BufferedReader reader) throws IOException
     {
         System.out.print("Adding an undergraduate student. Wish to proceed? Y/n: ");
@@ -175,6 +187,11 @@ public class Database
         System.out.println("Successfully added the student "+student.getName()+" "+ student.getSurname()+" to the database.");
     }
     
+    /**
+     * This function adds a postgraduate object to the database file
+     * @param reader 
+     * @throws IOException
+     */
     public void addPostgraduate(BufferedReader reader) throws IOException
     { 
         System.out.print("Adding an postgraduate student. Wish to proceed? Y/n: ");
@@ -260,6 +277,10 @@ public class Database
         System.out.println("Successfully added the student "+student.getName()+" "+ student.getSurname()+" to the database.");
     }
 
+    /**
+     * This displays all the students objects , undergraduates and postgraduates, that are in 
+     * the database file. 
+     */
     public void listStudents()
     {
         Student search = new Student();
@@ -268,6 +289,11 @@ public class Database
         output(result);
     }
     
+    /**
+     * This function displays all the students objects in the List.
+     * If there are none an appropriate message is displayed.
+     * @param set
+     */
     public void output(List set)
     {
         if (set.size() == 0)
@@ -284,6 +310,12 @@ public class Database
         }
     }
 
+    /**
+     * This function display a prompt and request the name of a postgraduate object to locate 
+     * in the database file. It will then display all the postgraduates with that name.
+     * @param reader 
+     * @throws IOException
+     */
     public void findPostgraduate(BufferedReader reader) throws IOException
     {
         System.out.print("Please Enter a student's first name: ");
@@ -297,6 +329,12 @@ public class Database
         output(result);
     }
 
+    /**
+     * This function display a prompt and request the name of a undergraduate object to locate 
+     * in the database file. It will then display all the undergraduates with that name.
+     * @param reader 
+     * @throws IOException
+     */
     public void findUndergraduate(BufferedReader reader) throws IOException
     {
         System.out.print("Please Enter a student's first name: ");
@@ -312,6 +350,13 @@ public class Database
         output(result);
     }
     
+    /**
+     * This function prompts the user to enter a student number. If the number is not in the database file 
+     * then it will leave the function else it will allow the user to update that particular student object's 
+     * attributes.
+     * @param reader 
+     * @throws IOException
+     */
     public void updateStudent(BufferedReader reader) throws IOException
     {
         System.out.println("UPDATE STUDENT");
@@ -489,6 +534,7 @@ public class Database
         System.out.println("--------------------------------------------");
 
     }
-	private ObjectContainer database;
+	
+    private ObjectContainer database;
 	private final String fileName = "database.db4o";
 }
