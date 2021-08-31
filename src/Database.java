@@ -404,12 +404,60 @@ public class Database
             System.out.print("Enter new year of study: ");
             int yearOfStudy;
             String yearOfStudyString = reader.readLine();
+
+            boolean isValidYear = false;
+            do {
+                try { 
+                    int check = Integer.parseInt(yearOfStudyString); 
+                    if (check < 1)
+                    {
+                        System.out.print("Please enter a valid integer over the number zero: "); 
+                        yearOfStudyString = reader.readLine();
+                    }
+                    else isValidYear = true;
+                } catch(NumberFormatException e) { 
+                    System.out.print("Please enter a valid integer over the number zero: "); 
+                    yearOfStudyString = reader.readLine();
+                } catch(NullPointerException e) {
+                    return;
+                }
+                if(yearOfStudyString.toLowerCase().trim().equals("q")) 
+                {
+                    System.out.println("Undergraduate not updated!");
+                    return;
+                }        
+            } while (!isValidYear);
+            
             if (yearOfStudyString.isBlank()) yearOfStudy = undergrad.getYearOfStudy();
             else yearOfStudy = Integer.parseInt(yearOfStudyString);
             
             float averageMark;
             System.out.print("Enter new average mark: ");
             String averageMarkString = reader.readLine();
+            
+            boolean isValidAverage = false;
+            do {
+                try { 
+                    float check = Float.parseFloat(averageMarkString); 
+                    if (check < 0)
+                    {
+                        System.out.print("Please enter a valid integer over or equals the number zero: "); 
+                        averageMarkString = reader.readLine();
+                    }
+                    else isValidAverage = true;
+                } catch(NumberFormatException e) { 
+                    System.out.print("Please enter a valid float over or equals the number zero: "); 
+                    averageMarkString = reader.readLine();
+                } catch(NullPointerException e) {
+                    return;
+                }
+                if(averageMarkString.toLowerCase().trim().equals("q")) 
+                {
+                    System.out.println("Postgraduate not updated!");
+                    return;
+                }        
+            } while (!isValidAverage);
+            
             if (averageMarkString.isBlank()) averageMark = undergrad.getAverageMark();
             else averageMark = Float.parseFloat(averageMarkString);
 
