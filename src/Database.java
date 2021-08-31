@@ -112,9 +112,55 @@ public class Database
 
         System.out.print("Enter the student's year of study: ");
         String yearOfStudy = reader.readLine();
+        boolean isValidYear = false;
+        do {
+            try { 
+                int check = Integer.parseInt(yearOfStudy); 
+                if (check < 1)
+                {
+                    System.out.print("Please enter a valid integer over the number zero: "); 
+                    yearOfStudy = reader.readLine();
+                }
+                else isValidYear = true;
+            } catch(NumberFormatException e) { 
+                System.out.print("Please enter a valid integer over the number zero: "); 
+                yearOfStudy = reader.readLine();
+            } catch(NullPointerException e) {
+                return;
+            }
+            if(yearOfStudy.toLowerCase().trim().equals("q")) 
+            {
+                System.out.println("Undergraduate not added!");
+                return;
+            }        
+        } while (!isValidYear);
 
         System.out.print("Enter the student's average: ");
         String averageMark = reader.readLine();
+
+        boolean isValidAverage = false;
+        do {
+            try { 
+                float check = Float.parseFloat(averageMark); 
+                if (check < 0)
+                {
+                    System.out.print("Please enter a valid integer over or equals the number zero: "); 
+                    averageMark = reader.readLine();
+                }
+                else isValidAverage = true;
+            } catch(NumberFormatException e) { 
+                System.out.print("Please enter a valid float over or equals the number zero: "); 
+                averageMark = reader.readLine();
+            } catch(NullPointerException e) {
+                return;
+            }
+            if(averageMark.toLowerCase().trim().equals("q")) 
+            {
+                System.out.println("Undergraduate not added!");
+                return;
+            }        
+        } while (!isValidAverage);
+
         
         Undergraduate student = new Undergraduate();
         
