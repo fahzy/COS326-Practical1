@@ -9,8 +9,6 @@ import java.io.BufferedReader;
 import java.util.List;
 import java.util.ArrayList;
 
-// TODO Add comments to code
-
 public class Database
 {
     /**This function allows us to access or create a db4o database file or create a new one.*/
@@ -121,7 +119,10 @@ public class Database
             } 
         }
         while (!isValid);
-
+        // ---------------------------------------------------
+        /**
+         * Same as code above
+         */
         System.out.print("Enter the student's year of study: ");
         String yearOfStudy = reader.readLine();
         boolean isValidYear = false;
@@ -320,12 +321,15 @@ public class Database
     {
         System.out.print("Please Enter a student's first name: ");
         String name = reader.readLine();
+        System.out.print("Please Enter a student's surname name: ");
+        String surname = reader.readLine();
 
         Postgraduate search = new Postgraduate();
         search.setName(name);
+        search.setSurname(surname);
         ObjectSet result = this.database.queryByExample(search);
            
-        System.out.println("POSTGRADUATES with the name "+name);
+        System.out.println("POSTGRADUATES with the name "+name+" "+surname);
         output(result);
     }
 
@@ -387,15 +391,18 @@ public class Database
             System.out.println();
             return;
         }
+        
         System.out.println("NOTE: If you would like to leave any value unchanged"+
         " just skip the prompt.");
 
         System.out.print("Enter new first name: ");
         String name = reader.readLine();
         if (name.isBlank()) name = student.getName();
+
         System.out.print("Enter new surname: ");
         String surname = reader.readLine();
         if (surname.isBlank()) surname = student.getSurname();
+        
         System.out.print("Enter new degree program: ");
         String degreeProgram = reader.readLine();
         if (degreeProgram.isBlank()) degreeProgram = student.getDegreeProgram();
